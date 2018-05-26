@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FEDBD0</color>
+    <color name="colorPrimaryDark">#E5CCC3</color>
+    <color name="colorAccent">#442C2E</color>
+    <color name="layer_color">#19000000</color>
+    <color name="item_record_green">#E8F5E9</color>
+    <color name="item_record_red">#FCE4EC</color>
+</resources>
