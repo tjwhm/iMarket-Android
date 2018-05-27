@@ -6,4 +6,6 @@
     <color name="layer_color">#19000000</color>
     <color name="item_record_green">#E8F5E9</color>
     <color name="item_record_red">#FCE4EC</color>
+    <color name="mdtp_accent_color">#FEDBD0</color>
+    <color name="mdtp_accent_color_dark">#FEDBD0</color>
 </resources>

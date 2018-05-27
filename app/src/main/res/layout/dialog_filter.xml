@@ -21,13 +21,21 @@
             android:textSize="20sp" />
     </LinearLayout>
 
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/ns_filter_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="type"
+        android:singleLine="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp" />
+
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/met_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:hint="name"
         android:singleLine="true"
         android:textColor="@color/colorAccent"
@@ -35,44 +43,231 @@
         app:met_floatingLabel="normal" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/met_brand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:hint="brand"
         android:singleLine="true"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:met_floatingLabel="normal" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
+        android:orientation="horizontal">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_price_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            android:hint="price from"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_price_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_weight="1"
+            android:hint="to"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_date_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="date from"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_filter_date_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:hint="select date"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_date_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:hint="color"
-        android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp"
-        app:met_floatingLabel="normal" />
+        android:orientation="vertical">
 
-    <org.angmarch.views.NiceSpinner
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="date to"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/tv_filter_date_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="select date"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_filter_clothes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="size"
-        android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp" />
+        android:orientation="vertical">
 
-    <org.angmarch.views.NiceSpinner
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/ns_filter_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="size"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/ns_filter_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="gender"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_filter_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="color"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_filter_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="gender"
-        android:singleLine="true"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp" />
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_filter_origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="origin"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <LinearLayout
+            android:id="@+id/ll_shelf_life_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="shelf life from"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tv_filter_shelf_life_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:hint="select date"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shelf_life_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shelf life to"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tv_filter_shelf_life_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="select date"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="4dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_filter_cancel"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/buy_button_selector"
+            android:text="CANCEL"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_filter_ok"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/buy_button_selector"
+            android:text="OK"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp" />
+    </LinearLayout>
 </LinearLayout>

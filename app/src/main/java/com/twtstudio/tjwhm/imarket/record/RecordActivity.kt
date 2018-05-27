@@ -1,20 +1,41 @@
 package com.twtstudio.tjwhm.imarket.record
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.view.View
 import android.view.Window
-import android.widget.Toast
+import android.widget.AdapterView
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.RecordBean
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
+import org.angmarch.views.NiceSpinner
+import java.util.*
 
-class RecordActivity : AppCompatActivity() {
+class RecordActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+
+    private lateinit var tvDateFrom: TextView
+    private lateinit var tvDateTo: TextView
+    private lateinit var tvShelfLifeFrom: TextView
+    private lateinit var tvShelfLifeTo: TextView
+    private var dateTarget = "date target"
+    private var dateTempString = ""
+
+    companion object {
+        val DATE_FROM = "date from"
+        val DATE_TO = "date to"
+        val SHELF_LIFE_FROM = "shelf life from"
+        val SHELF_LIFE_TO = "shelf life to"
+    }
 
     lateinit var toolbar: Toolbar
     lateinit var rvRecord: RecyclerView
@@ -59,10 +80,100 @@ class RecordActivity : AppCompatActivity() {
     private fun launchDialog() {
         val dialog = layoutInflater.inflate(R.layout.dialog_filter, findViewById(R.id.ll_filter_dialog))
         val builder = AlertDialog.Builder(this)
-        var metName: MaterialEditText = dialog.findViewById(R.id.met_name)
-        metName.setOnClickListener { launchDialog() }
         builder.setView(dialog)
+        val metName: MaterialEditText = dialog.findViewById(R.id.met_name)
+        val metBrand: MaterialEditText = dialog.findViewById(R.id.met_brand)
+        val metPriceFrom: MaterialEditText = dialog.findViewById(R.id.met_price_from)
+        val metPriceTo: MaterialEditText = dialog.findViewById(R.id.met_price_to)
+        val llDateFrom: LinearLayout = dialog.findViewById(R.id.ll_date_from)
+        val llDateTo: LinearLayout = dialog.findViewById(R.id.ll_date_to)
+        tvDateFrom = dialog.findViewById(R.id.tv_filter_date_from)
+        tvDateTo = dialog.findViewById(R.id.tv_filter_date_to)
+        val nsType: NiceSpinner = dialog.findViewById(R.id.ns_filter_type)
+        val llClothes: LinearLayout = dialog.findViewById(R.id.ll_filter_clothes)
+        val llFood: LinearLayout = dialog.findViewById(R.id.ll_filter_food)
+        val metColor: MaterialEditText = dialog.findViewById(R.id.met_filter_color)
+        val nsSize: NiceSpinner = dialog.findViewById(R.id.ns_filter_size)
+        val nsGender: NiceSpinner = dialog.findViewById(R.id.ns_filter_gender)
+        val metOrigin: MaterialEditText = dialog.findViewById(R.id.met_filter_origin)
+        val llShelfLifeFrom: LinearLayout = dialog.findViewById(R.id.ll_shelf_life_from)
+        val llShelfLifeTo: LinearLayout = dialog.findViewById(R.id.ll_shelf_life_to)
+        tvShelfLifeFrom = dialog.findViewById(R.id.tv_filter_shelf_life_from)
+        tvShelfLifeTo = dialog.findViewById(R.id.tv_filter_shelf_life_to)
+        llClothes.visibility = View.GONE
+        llFood.visibility = View.GONE
+        val typeSpinnerDataList = mutableListOf("all", "clothes", "food")
+        nsType.apply {
+            attachDataSource(typeSpinnerDataList)
+            setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    when (position) {
+                        0 -> {
+                            llClothes.visibility = View.GONE
+                            llFood.visibility = View.GONE
+                        }
+                        1 -> {
+                            llClothes.visibility = View.VISIBLE
+                            llFood.visibility = View.GONE
+                        }
+                        2 -> {
+                            llClothes.visibility = View.GONE
+                            llFood.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            })
+        }
+        llDateFrom.setOnClickListener { launchDatePicker(DATE_FROM) }
+        llDateTo.setOnClickListener { launchDatePicker(DATE_TO) }
+        llShelfLifeFrom.setOnClickListener { launchDatePicker(SHELF_LIFE_FROM) }
+        llShelfLifeTo.setOnClickListener { launchDatePicker(SHELF_LIFE_TO) }
         builder.show()
+    }
+
+    override fun onTimeSet(view: TimePickerDialog?, hourOfDay: Int, minute: Int, second: Int) {
+        val text = "$dateTempString$hourOfDay:$minute:00"
+        when (dateTarget) {
+            DATE_FROM -> tvDateFrom.text = text
+            DATE_TO -> tvDateTo.text = text
+            SHELF_LIFE_FROM -> tvShelfLifeFrom.text = text
+            SHELF_LIFE_TO -> tvShelfLifeTo.text = text
+        }
+    }
+
+    override fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+        dateTempString = "$year-${monthOfYear + 1}-$dayOfMonth "
+        val now = Calendar.getInstance()
+        val timePickerDialog = TimePickerDialog.newInstance(this@RecordActivity,
+                now.get(Calendar.HOUR), now.get(Calendar.MINUTE), now.get(Calendar.SECOND), true
+        )
+        timePickerDialog.show(fragmentManager, "time")
+        timePickerDialog.accentColor = resources.getColor(R.color.colorPrimary)
+        timePickerDialog.setCancelColor(resources.getColor(R.color.colorAccent))
+        timePickerDialog.setCancelText("Cancel")
+        timePickerDialog.setOkColor(resources.getColor(R.color.colorAccent))
+        timePickerDialog.setOkText("Ok")
+        timePickerDialog.vibrate(false)
+
+    }
+
+    private fun launchDatePicker(target: String) {
+        dateTarget = target
+        val now = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog.newInstance(this@RecordActivity, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show(fragmentManager, "date")
+        datePickerDialog.accentColor = resources.getColor(R.color.colorPrimary)
+        datePickerDialog.setCancelColor(resources.getColor(R.color.colorAccent))
+        datePickerDialog.setCancelText("Cancel")
+        datePickerDialog.setOkColor(resources.getColor(R.color.colorAccent))
+        datePickerDialog.setOkText("Ok")
+        datePickerDialog.vibrate(false)
+
     }
 
 }
