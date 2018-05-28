@@ -1,9 +1,10 @@
 package com.twtstudio.tjwhm.imarket.detail
 
 import android.widget.Toast
-import com.twtstudio.tjwhm.imarket.customer.BASE_URL
 import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.ClothesBean
+import com.twtstudio.tjwhm.imarket.FoodBean
+import com.twtstudio.tjwhm.imarket.customer.BASE_URL
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,12 +23,32 @@ class DetailPresenter(val detailActivity: DetailActivity) {
         call.enqueue(object : Callback<BaseBean<ClothesBean>> {
             override fun onResponse(call: Call<BaseBean<ClothesBean>>?, response: Response<BaseBean<ClothesBean>>?) {
                 if (response?.body() != null) {
-                    detailActivity.setDetailInfo(response.body()!!)
+                    detailActivity.setClothesDetailInfo(response.body()!!)
                 }
             }
 
             override fun onFailure(call: Call<BaseBean<ClothesBean>>?, t: Throwable?) {
                 Toast.makeText(detailActivity, "Internet Error", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    fun getFoodDetailInfo(sid: String) {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val request = retrofit.create(DetailApi::class.java)
+        val call = request.getFoodDetailInfo(sid)
+        call.enqueue(object : Callback<BaseBean<FoodBean>> {
+            override fun onFailure(call: Call<BaseBean<FoodBean>>?, t: Throwable?) {
+                Toasty.error(detailActivity, "error", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<BaseBean<FoodBean>>?, response: Response<BaseBean<FoodBean>>?) {
+                if (response?.body() != null) {
+                    detailActivity.setFoodDetailInfo(response.body()!!)
+                }
             }
         })
     }

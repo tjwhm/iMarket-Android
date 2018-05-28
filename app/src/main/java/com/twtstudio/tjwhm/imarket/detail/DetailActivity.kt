@@ -1,8 +1,8 @@
 package com.twtstudio.tjwhm.imarket.detail
 
 import android.annotation.SuppressLint
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.Window
@@ -10,9 +10,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.ClothesBean
+import com.twtstudio.tjwhm.imarket.FoodBean
+import com.twtstudio.tjwhm.imarket.R
 import es.dmoral.toasty.Toasty
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
@@ -49,8 +50,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         ivInc = findViewById(R.id.iv_detail_inc)
         tvNum = findViewById(R.id.tv_detail_num)
         btnBuy = findViewById(R.id.btn_detail_buy)
+
+
         sid = intent.getStringExtra("sid")
-        detailPresenter.getClothesDetailInfo(sid)
+        if (sid.toInt() < 1000) {
+            detailPresenter.getClothesDetailInfo(sid)
+        } else {
+            detailPresenter.getFoodDetailInfo(sid)
+        }
+
         ivInc.setOnClickListener(this)
         ivDec.setOnClickListener(this)
         btnBuy.setOnClickListener(this)
@@ -82,13 +90,24 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     @SuppressLint("SetTextI18n")
-    fun setDetailInfo(baseBean: BaseBean<ClothesBean>) {
+    fun setClothesDetailInfo(baseBean: BaseBean<ClothesBean>) {
         tvBrand.text = baseBean.data.brand
         tvPrice.text = "$${baseBean.data.price}"
         tvName.text = baseBean.data.name
         tvSize.text = "Size: ${baseBean.data.size}"
         tvColor.text = "Color: ${baseBean.data.color}"
         tvGender.text = "Gender: ${baseBean.data.suitable_crowd}"
+        tvStock.text = "${baseBean.data.in_stock} in store"
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun setFoodDetailInfo(baseBean: BaseBean<FoodBean>) {
+        tvBrand.text = baseBean.data.brand
+        tvPrice.text = "$${baseBean.data.price}"
+        tvName.text = baseBean.data.name
+        tvSize.text = "Origin: ${baseBean.data.origin}"
+        tvColor.text = "Shelf Life: ${baseBean.data.shelf_life}"
+        tvGender.text = ""
         tvStock.text = "${baseBean.data.in_stock} in store"
     }
 }

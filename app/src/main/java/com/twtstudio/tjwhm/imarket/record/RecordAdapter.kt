@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.BaseBean
+import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.RecordBean
 
 class RecordAdapter(var recordsData: BaseBean<List<RecordBean>>, var context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -27,15 +27,20 @@ class RecordAdapter(var recordsData: BaseBean<List<RecordBean>>, var context: Co
         if (holder is RecordViewHolder) {
             if (recordsData.data[position].type == "sell") {
                 holder.cvRecord.setCardBackgroundColor(context?.resources!!.getColor(R.color.item_record_green))
+                holder.tvType.text = "SOLD"
             } else {
                 holder.cvRecord.setCardBackgroundColor(context?.resources!!.getColor(R.color.item_record_red))
+                holder.tvType.text = "IN"
             }
             holder.apply {
                 tvId.text = "id:${recordsData.data[position].sid}"
                 tvTime.text = recordsData.data[position].time
                 tvPriceTimesNum.text = "$${recordsData.data[position].price} * ${recordsData.data[position].num}"
-                tvValue.text = "$${recordsData.data[position].value}"
-                tvType.text = recordsData.data[position].type.toUpperCase()
+                if (recordsData.data[position].value.toString().length > 7) {
+                    tvValue.text = "$${recordsData.data[position].value.toString().substring(0, 5)}"
+                } else {
+                    tvValue.text = "$${recordsData.data[position].value}"
+                }
             }
         }
     }

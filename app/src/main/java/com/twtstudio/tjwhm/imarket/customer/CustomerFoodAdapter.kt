@@ -11,21 +11,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.twtstudio.tjwhm.imarket.BaseBean
-import com.twtstudio.tjwhm.imarket.ClothesBean
+import com.twtstudio.tjwhm.imarket.FoodBean
 import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.detail.DetailActivity
 import com.twtstudio.tjwhm.imarket.ext.random
 
-class CustomerClothesAdapter(var productsData: BaseBean<List<ClothesBean>>, var context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CustomerFoodAdapter(var productsData: BaseBean<List<FoodBean>>, var context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ClothesViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer_product, parent, false))
+        return FoodViewHolder(LayoutInflater.from(context).inflate(R.layout.item_customer_product, parent, false))
     }
 
+    override fun getItemCount(): Int {
+        return productsData.data.size
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val data = productsData.data[position]
-        if (holder is ClothesViewHolder) {
+        if (holder is FoodViewHolder) {
             holder.tvTitle.text = data.name
             holder.tvPrice.text = "$" + data.price.toString()
             holder.tvStock.text = data.in_stock.toString() + " in store"
@@ -39,11 +43,7 @@ class CustomerClothesAdapter(var productsData: BaseBean<List<ClothesBean>>, var 
     }
 
 
-    override fun getItemCount(): Int {
-        return productsData.data.size
-    }
-
-    inner class ClothesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var view = itemView
         var tvTitle: TextView = itemView.findViewById(R.id.tv_clothes_title)
         var tvPrice: TextView = itemView.findViewById(R.id.tv_clothes_price)

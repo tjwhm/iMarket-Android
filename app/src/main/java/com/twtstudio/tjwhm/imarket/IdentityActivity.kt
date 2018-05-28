@@ -1,10 +1,11 @@
 package com.twtstudio.tjwhm.imarket
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.twtstudio.tjwhm.imarket.customer.CustomerActivity
+import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import com.twtstudio.tjwhm.imarket.admin.AdminActivity
+import com.twtstudio.tjwhm.imarket.customer.CustomerActivity
 import com.twtstudio.tjwhm.imarket.record.RecordActivity
 
 
@@ -27,6 +28,10 @@ class IdentityActivity : AppCompatActivity() {
             })
         } else {
             btnCustomer.text = "Products"
+            btnCustomer.setOnClickListener {
+                val intent = Intent(this@IdentityActivity, AdminActivity::class.java)
+                startActivity(intent)
+            }
             btnAdmin.apply {
                 text = "Records"
                 setOnClickListener({
