@@ -1,12 +1,15 @@
 package com.twtstudio.tjwhm.imarket.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
 import android.view.Window
 import com.twtstudio.tjwhm.imarket.R
+import com.twtstudio.tjwhm.imarket.add.AddActivity
 
 class AdminActivity : AppCompatActivity() {
 
@@ -38,5 +41,16 @@ class AdminActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressed() }
         toolbar.setTitleTextColor(resources.getColor(R.color.colorAccent))
         toolbar.elevation = 0.0F
+
+        toolbar.setOnMenuItemClickListener {
+            var intent = Intent(this@AdminActivity, AddActivity::class.java)
+            startActivity(intent)
+            false
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_admin, menu)
+        return true
     }
 }

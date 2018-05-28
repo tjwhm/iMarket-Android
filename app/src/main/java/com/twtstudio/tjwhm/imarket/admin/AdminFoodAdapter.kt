@@ -2,6 +2,7 @@ package com.twtstudio.tjwhm.imarket.admin
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.FoodBean
 import com.twtstudio.tjwhm.imarket.R
+import com.twtstudio.tjwhm.imarket.detail.DetailActivity
 import com.twtstudio.tjwhm.imarket.ext.random
 
 class AdminFoodAdapter(var productsData: BaseBean<List<FoodBean>>, var context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -37,6 +39,10 @@ class AdminFoodAdapter(var productsData: BaseBean<List<FoodBean>>, var context: 
             val params = holder.cvClothes.layoutParams
             params.height = random(230, 270) * 3
             holder.cvClothes.layoutParams = params
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("sid", data.sid.toString())
+            intent.putExtra("isAdmin", true)
+            holder.itemView.setOnClickListener { context?.startActivity(intent) }
         }
     }
 

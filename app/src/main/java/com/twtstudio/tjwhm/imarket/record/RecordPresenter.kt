@@ -2,12 +2,10 @@ package com.twtstudio.tjwhm.imarket.record
 
 import android.widget.Toast
 import com.twtstudio.tjwhm.imarket.BaseBean
-import com.twtstudio.tjwhm.imarket.BuildConfig
 import com.twtstudio.tjwhm.imarket.RecordBean
 import com.twtstudio.tjwhm.imarket.customer.BASE_URL
+import com.twtstudio.tjwhm.imarket.ext.getDebugClient
 import es.dmoral.toasty.Toasty
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,23 +38,13 @@ class RecordPresenter(val recordActivity: RecordActivity) {
     fun getEligibleRecords(map: Map<String, String>) {
 
 
-        val builder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) {
-            // Log信息拦截器
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY//这里可以选择拦截级别
 
-            //设置 Debug Log 模式
-            builder.addInterceptor(loggingInterceptor)
-        }
-
-        val client = builder.build()
 
 
         val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
-                .client(client)
+                .client(getDebugClient())
                 .build()
         val request = retrofit.create(RecordApi::class.java)
         val call = request.getEligibleRecords(map)

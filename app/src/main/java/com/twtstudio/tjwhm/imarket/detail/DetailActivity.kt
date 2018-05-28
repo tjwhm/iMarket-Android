@@ -32,13 +32,25 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var tvNum: TextView
     lateinit var btnBuy: Button
     lateinit var sid: String
+
+    // Admin
+
+    lateinit var tvPrice1: TextView
+    lateinit var tvOnSale: TextView
+    lateinit var btnPurchase: Button
+    lateinit var btnChangeStatus: Button
+
     private val detailPresenter = DetailPresenter(this)
+
+
+    private var isAdmin = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.activity_detail)
         initToolbar()
+        isAdmin = intent.getBooleanExtra("isAdmin", false)
         tvBrand = findViewById(R.id.tv_detail_brand)
         tvPrice = findViewById(R.id.tv_detail_name)
         tvName = findViewById(R.id.tv_detail_name)
@@ -51,6 +63,20 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         tvNum = findViewById(R.id.tv_detail_num)
         btnBuy = findViewById(R.id.btn_detail_buy)
 
+        // Admin
+        tvPrice1 = findViewById(R.id.tv_detail_price1)
+        tvOnSale = findViewById(R.id.tv_detail_on_sale)
+        btnPurchase = findViewById(R.id.btn_detail_purchase)
+        btnChangeStatus = findViewById(R.id.btn_detail_change_status)
+
+        if (!isAdmin) {
+            tvPrice1.visibility = View.GONE
+            tvOnSale.visibility = View.GONE
+            btnPurchase.visibility = View.GONE
+            btnChangeStatus.visibility = View.GONE
+        } else {
+            btnBuy.visibility = View.GONE
+        }
 
         sid = intent.getStringExtra("sid")
         if (sid.toInt() < 1000) {
@@ -61,7 +87,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         ivInc.setOnClickListener(this)
         ivDec.setOnClickListener(this)
-        btnBuy.setOnClickListener(this)
+        if (isAdmin) {
+            btnChangeStatus.setOnClickListener(this)
+            btnPurchase.setOnClickListener(this)
+        } else {
+            btnBuy.setOnClickListener(this)
+        }
     }
 
     private fun initToolbar() {
@@ -85,7 +116,23 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         } else if (v == ivInc) {
             tvNum.text = (tvNum.text.toString().toInt() + 1).toString()
         } else if (v == btnBuy) {
-            detailPresenter.buyClothes(sid, tvNum.text.toString())
+            if (sid.toInt() < 1000) {
+                detailPresenter.buyClothes(sid, tvNum.text.toString())
+            } else {
+                detailPresenter.buyFood(sid, tvNum.text.toString())
+            }
+        } else if (v == btnPurchase) {
+            if (sid.toInt() < 1000) {
+                detailPresenter.buyClothes(sid, "${0 - tvNum.text.toString().toInt()}")
+            } else {
+                detailPresenter.buyFood(sid, "-${tvNum.text}")
+            }
+        } else if (v == btnChangeStatus) {
+            if (sid.toInt() < 1000) {
+                detailPresenter.changeClothesStatus(sid)
+            } else {
+                detailPresenter.changeFoodStatus(sid)
+            }
         }
     }
 
@@ -98,6 +145,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         tvColor.text = "Color: ${baseBean.data.color}"
         tvGender.text = "Gender: ${baseBean.data.suitable_crowd}"
         tvStock.text = "${baseBean.data.in_stock} in store"
+        if (isAdmin) {
+            tvPrice1.text = "$${baseBean.data.price1}"
+            if (baseBean.data.on_sale) {
+                tvOnSale.text = "on sale"
+            } else {
+                tvOnSale.text = "not on sale"
+            }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -109,5 +164,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         tvColor.text = "Shelf Life: ${baseBean.data.shelf_life}"
         tvGender.text = ""
         tvStock.text = "${baseBean.data.in_stock} in store"
+        if (isAdmin) {
+            tvPrice1.text = "$${baseBean.data.price1}"
+            if (baseBean.data.on_sale) {
+                tvOnSale.text = "on sale"
+            } else {
+                tvOnSale.text = "not on sale"
+            }
+        }
     }
 }

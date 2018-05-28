@@ -5,6 +5,7 @@ import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.ClothesBean
 import com.twtstudio.tjwhm.imarket.FoodBean
 import com.twtstudio.tjwhm.imarket.customer.BASE_URL
+import com.twtstudio.tjwhm.imarket.ext.getDebugClient
 import es.dmoral.toasty.Toasty
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,19 +58,89 @@ class DetailPresenter(val detailActivity: DetailActivity) {
         val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(getDebugClient())
                 .build()
         val request = retrofit.create(DetailApi::class.java)
-        val call = request.buyClothes(sid, "-$change")
+        val call = request.buyClothes(sid, "${0 - change.toInt()}")
         call.enqueue(object : Callback<BaseBean<Boolean>> {
             override fun onFailure(call: Call<BaseBean<Boolean>>?, t: Throwable?) {
                 Toasty.error(detailActivity, "error", Toast.LENGTH_SHORT).show()
-
             }
 
             override fun onResponse(call: Call<BaseBean<Boolean>>?, response: Response<BaseBean<Boolean>>?) {
                 if (response?.body()?.data == true) {
                     Toasty.success(detailActivity, "success!", Toast.LENGTH_SHORT).show()
                     getClothesDetailInfo(sid)
+                }
+            }
+        })
+    }
+
+    fun buyFood(sid: String, change: String) {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getDebugClient())
+                .build()
+        val request = retrofit.create(DetailApi::class.java)
+
+        val call = request.buyFood(sid, "-$change")
+
+        call.enqueue(object : Callback<BaseBean<Boolean>> {
+            override fun onFailure(call: Call<BaseBean<Boolean>>?, t: Throwable?) {
+                Toasty.error(detailActivity, "error", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<BaseBean<Boolean>>?, response: Response<BaseBean<Boolean>>?) {
+                if (response?.body()?.data == true) {
+                    Toasty.success(detailActivity, "success!", Toast.LENGTH_SHORT).show()
+                    getFoodDetailInfo(sid)
+                }
+            }
+        })
+    }
+
+    fun changeClothesStatus(sid: String) {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getDebugClient())
+                .build()
+
+        val request = retrofit.create(DetailApi::class.java)
+        val call = request.changeClothesStatus(sid)
+
+        call.enqueue(object : Callback<BaseBean<Boolean>> {
+            override fun onFailure(call: Call<BaseBean<Boolean>>?, t: Throwable?) {
+                Toasty.error(detailActivity, "error", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<BaseBean<Boolean>>?, response: Response<BaseBean<Boolean>>?) {
+                if (response?.body()?.data == true) {
+                    Toasty.success(detailActivity, "success!", Toast.LENGTH_SHORT).show()
+                    getClothesDetailInfo(sid)
+                }
+            }
+        })
+    }
+
+    fun changeFoodStatus(sid: String) {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(getDebugClient())
+                .build()
+        val request = retrofit.create(DetailApi::class.java)
+        val call = request.changeFoodStatus(sid)
+        call.enqueue(object : Callback<BaseBean<Boolean>> {
+            override fun onFailure(call: Call<BaseBean<Boolean>>?, t: Throwable?) {
+                Toasty.error(detailActivity, "error", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<BaseBean<Boolean>>?, response: Response<BaseBean<Boolean>>?) {
+                if (response?.body()?.data == true) {
+                    Toasty.success(detailActivity, "success!", Toast.LENGTH_SHORT).show()
+                    getFoodDetailInfo(sid)
                 }
             }
         })

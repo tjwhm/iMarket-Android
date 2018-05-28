@@ -19,9 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".customer.CustomerActivity" />
-        <activity android:name=".detail.DetailActivity" />
+        <activity
+            android:name=".detail.DetailActivity"
+            android:launchMode="singleTop" />
         <activity android:name=".record.RecordActivity" />
-        <activity android:name=".admin.AdminActivity"></activity>
+        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".add.AddActivity" />
     </application>
 
 </manifest>

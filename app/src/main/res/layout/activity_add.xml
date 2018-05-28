@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".add.AddActivity">
+
+    <include
+        layout="@layout/common_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/ns_add_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorAccent" />
+
+    <LinearLayout
+        android:id="@+id/ll_add_clothes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mdtp_white"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_clothes_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="name"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_clothes_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="brand"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="color"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/ns_add_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/ns_add_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_clothes_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="sale price"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_clothes_price1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="purchase price"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_clothes_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="num"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_add_food"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/mdtp_white"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_food_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="name"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_food_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="brand"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_add_shelf_life"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="shelf life"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tv_add_shelf_life"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="select date"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_origin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="origin"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_food_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="sale price"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_food_price1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="purchase price"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/met_add_food_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginStart="24dp"
+            android:hint="num"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
+            app:met_floatingLabel="normal" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_confirm"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/buy_button_selector"
+        android:text="confirm"
+        android:textColor="@color/colorAccent" />
+</LinearLayout>

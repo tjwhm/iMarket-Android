@@ -66,7 +66,7 @@
             android:layout_marginStart="24dp"
             android:layout_weight="1"
             android:hint="price from"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:singleLine="true"
             android:textColor="@color/colorAccent"
             android:textSize="14sp"
@@ -80,7 +80,7 @@
             android:layout_marginStart="24dp"
             android:layout_weight="1"
             android:hint="to"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:singleLine="true"
             android:textColor="@color/colorAccent"
             android:textSize="14sp"
@@ -220,7 +220,7 @@
             android:id="@+id/ll_shelf_life_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical">
 

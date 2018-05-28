@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.AdapterView
@@ -152,6 +153,9 @@ class RecordActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
             map["color"] = metColor.text.toString()
             map["size"] = nsSize.text.toString()
             map["suitable_crowd"] = nsGender.text.toString()
+
+            Log.d("zzzzz", "${map["type"]}  ${map["size"]}  ${map["size"]}")
+
             if (metPriceFrom.text != null && metPriceFrom.text.isNotEmpty()) {
                 map["low"] = metPriceFrom.text.toString()
             } else {

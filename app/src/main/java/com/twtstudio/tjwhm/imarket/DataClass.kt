@@ -14,6 +14,7 @@ data class ClothesBean(var sid: Int,
                        var suitable_crowd: String,
                        var price: Double,
                        var in_stock: Int,
+                       var price1: Double,
                        var on_sale: Boolean) : DataClass
 
 data class FoodBean(var sid: Int,
