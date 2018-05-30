@@ -17,7 +17,7 @@ interface DetailApi {
     @FormUrlEncoded
     fun buyClothes(@Path("sid") sid: String, @Field("change") change: String): Call<BaseBean<Boolean>>
 
-    @PUT("goods/clothes/{sid}")
+    @PUT("goods/food/{sid}")
     @FormUrlEncoded
     fun buyFood(@Path("sid") sid: String, @Field("change") change: String): Call<BaseBean<Boolean>>
 

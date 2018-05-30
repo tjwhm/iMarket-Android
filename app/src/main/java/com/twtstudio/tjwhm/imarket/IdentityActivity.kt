@@ -1,7 +1,9 @@
 package com.twtstudio.tjwhm.imarket
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import com.twtstudio.tjwhm.imarket.admin.AdminActivity
@@ -13,6 +15,8 @@ class IdentityActivity : AppCompatActivity() {
 
     lateinit var btnCustomer: Button
     lateinit var btnAdmin: Button
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_identity)
@@ -25,6 +29,8 @@ class IdentityActivity : AppCompatActivity() {
                 val intent = Intent(this@IdentityActivity, IdentityActivity::class.java)
                 intent.putExtra("isAdmin", true)
                 startActivity(intent)
+
+
             })
         } else {
             btnCustomer.text = "Products"

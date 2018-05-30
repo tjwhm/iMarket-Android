@@ -84,7 +84,7 @@ class DetailPresenter(val detailActivity: DetailActivity) {
                 .build()
         val request = retrofit.create(DetailApi::class.java)
 
-        val call = request.buyFood(sid, "-$change")
+        val call = request.buyFood(sid, "${0 - change.toInt()}")
 
         call.enqueue(object : Callback<BaseBean<Boolean>> {
             override fun onFailure(call: Call<BaseBean<Boolean>>?, t: Throwable?) {

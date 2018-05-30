@@ -32,6 +32,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var tvNum: TextView
     lateinit var btnBuy: Button
     lateinit var sid: String
+    var stock = 0
 
     // Admin
 
@@ -52,7 +53,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         initToolbar()
         isAdmin = intent.getBooleanExtra("isAdmin", false)
         tvBrand = findViewById(R.id.tv_detail_brand)
-        tvPrice = findViewById(R.id.tv_detail_name)
+        tvPrice = findViewById(R.id.tv_detail_price)
         tvName = findViewById(R.id.tv_detail_name)
         tvSize = findViewById(R.id.tv_detail_size)
         tvColor = findViewById(R.id.tv_detail_color)
@@ -68,6 +69,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         tvOnSale = findViewById(R.id.tv_detail_on_sale)
         btnPurchase = findViewById(R.id.btn_detail_purchase)
         btnChangeStatus = findViewById(R.id.btn_detail_change_status)
+
 
         if (!isAdmin) {
             tvPrice1.visibility = View.GONE
@@ -116,11 +118,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         } else if (v == ivInc) {
             tvNum.text = (tvNum.text.toString().toInt() + 1).toString()
         } else if (v == btnBuy) {
-            if (sid.toInt() < 1000) {
-                detailPresenter.buyClothes(sid, tvNum.text.toString())
-            } else {
-                detailPresenter.buyFood(sid, tvNum.text.toString())
-            }
+            if (tvNum.text.toString().toInt() > stock) {
+                Toasty.error(this@DetailActivity, "not that much!", Toast.LENGTH_SHORT).show()
+            } else
+                if (sid.toInt() < 1000) {
+                    detailPresenter.buyClothes(sid, tvNum.text.toString())
+                } else {
+                    detailPresenter.buyFood(sid, tvNum.text.toString())
+                }
         } else if (v == btnPurchase) {
             if (sid.toInt() < 1000) {
                 detailPresenter.buyClothes(sid, "${0 - tvNum.text.toString().toInt()}")
@@ -138,6 +143,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     fun setClothesDetailInfo(baseBean: BaseBean<ClothesBean>) {
+
+        stock = baseBean.data.in_stock
         tvBrand.text = baseBean.data.brand
         tvPrice.text = "$${baseBean.data.price}"
         tvName.text = baseBean.data.name
@@ -157,6 +164,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     fun setFoodDetailInfo(baseBean: BaseBean<FoodBean>) {
+        stock = baseBean.data.in_stock
         tvBrand.text = baseBean.data.brand
         tvPrice.text = "$${baseBean.data.price}"
         tvName.text = baseBean.data.name

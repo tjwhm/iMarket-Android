@@ -31,10 +31,17 @@ class AdminFoodAdapter(var productsData: BaseBean<List<FoodBean>>, var context: 
             holder.tvTitle.text = data.name
             holder.tvPrice.text = "$" + data.price.toString()
             holder.tvStock.text = data.in_stock.toString() + " in store"
+            if (data.in_stock < 6) {
+                holder.cvClothes.setCardBackgroundColor(context?.resources!!.getColor(R.color.no_sale_yellow))
+                println("zzzzzz$position")
+            } else {
+                holder.cvClothes.setCardBackgroundColor(context?.resources!!.getColor(R.color.mdtp_white))
+            }
             if (data.on_sale) {
                 holder.tvStatus.text = "on sale"
             } else {
                 holder.tvStatus.text = "not on sale"
+                holder.cvClothes.setCardBackgroundColor(context?.resources!!.getColor(R.color.item_record_red))
             }
             val params = holder.cvClothes.layoutParams
             params.height = random(230, 270) * 3

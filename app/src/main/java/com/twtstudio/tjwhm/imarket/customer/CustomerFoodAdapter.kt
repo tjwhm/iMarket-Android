@@ -39,7 +39,9 @@ class CustomerFoodAdapter(var productsData: BaseBean<List<FoodBean>>, var contex
             val intent = Intent(context, DetailActivity::class.java)
             intent.putExtra("sid", data.sid.toString())
             intent.putExtra("isAdmin", false)
-            holder.itemView.setOnClickListener { context?.startActivity(intent) }
+            holder.itemView.setOnClickListener {
+                context?.startActivity(intent)
+            }
         }
     }
 

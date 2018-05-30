@@ -1,5 +1,6 @@
 package com.twtstudio.tjwhm.imarket.record
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AlertDialog
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.view.Window
 import android.widget.AdapterView
@@ -18,6 +20,7 @@ import com.rengwuxian.materialedittext.MaterialEditText
 import com.twtstudio.tjwhm.imarket.BaseBean
 import com.twtstudio.tjwhm.imarket.R
 import com.twtstudio.tjwhm.imarket.RecordBean
+import com.twtstudio.tjwhm.imarket.export.ExportActivity
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
 import org.angmarch.views.NiceSpinner
@@ -62,6 +65,7 @@ class RecordActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
     }
 
     private fun initToolbar() {
+
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Records"
         setSupportActionBar(toolbar)
@@ -69,6 +73,16 @@ class RecordActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         toolbar.setTitleTextColor(resources.getColor(R.color.colorAccent))
+        toolbar.setOnMenuItemClickListener {
+            var intent = Intent(this@RecordActivity, ExportActivity::class.java)
+            startActivity(intent)
+            false
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_record, menu)
+        return true
     }
 
     fun setRecordsData(baseBean: BaseBean<List<RecordBean>>) {
@@ -172,7 +186,6 @@ class RecordActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
             presenter.getEligibleRecords(map)
             dialog.dismiss()
         }
-//        builder.show()
         dialog.show()
     }
 

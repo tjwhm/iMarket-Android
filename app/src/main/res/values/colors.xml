@@ -8,4 +8,5 @@
     <color name="item_record_red">#FCE4EC</color>
     <color name="mdtp_accent_color">#FEDBD0</color>
     <color name="mdtp_accent_color_dark">#FEDBD0</color>
+    <color name="no_sale_yellow">#FFF9C4</color>
 </resources>

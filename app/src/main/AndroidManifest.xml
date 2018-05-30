@@ -25,6 +25,7 @@
         <activity android:name=".record.RecordActivity" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".add.AddActivity" />
+        <activity android:name=".export.ExportActivity"></activity>
     </application>
 
 </manifest>
